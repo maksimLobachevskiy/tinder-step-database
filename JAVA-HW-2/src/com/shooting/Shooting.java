@@ -32,12 +32,7 @@ public class Shooting {
       System.out.print("Input line number from 1 to 5: ");
       int lineNum = verifyInputInteger();
 
-      if (lineNum > matrix.length) {
-        System.out.print("Input line number from 1 to 5: ");
-        lineNum = verifyInputInteger();
-      }
-
-      System.out.print("Input line number from 1 to 5: ");
+      System.out.print("Input column number from 1 to 5: ");
       int colNum = verifyInputInteger();
 
       if (randNum1 == lineNum && randNum2 == colNum) {
@@ -73,5 +68,6 @@ public class Shooting {
       System.out.print("It's not a number, please enter a number from 1 to 5: ");
       return verifyInputInteger();
     }
-  };
+  }
 }
+

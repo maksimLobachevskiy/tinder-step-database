@@ -21,51 +21,50 @@ public class Human {
     this.surname = surname;
     this.year = year;
     this.iq = iq;
-
     this.schedule = schedule;
   }
 
   public Human() {
   }
 
-  public String getName() {
-    return name;
-  }
-
   public void setName(String name) {
     this.name = name;
   }
 
-  public String getSurname() {
-    return surname;
+  public String getName() {
+    return name;
   }
 
   public void setSurname(String surname) {
     this.surname = surname;
   }
 
-  public int getYear() {
-    return year;
+  public String getSurname() {
+    return surname;
   }
 
   public void setYear(int year) {
     this.year = year;
   }
 
-  public int getIq() {
-    return iq;
+  public int getYear() {
+    return year;
   }
 
   public void setIq(int iq) {
     this.iq = iq;
   }
 
-  public Family getFamily() {
-    return family;
+  public int getIq() {
+    return iq;
   }
 
   public void setFamily(Family family) {
     this.family = family;
+  }
+
+  public Family getFamily() {
+    return family;
   }
 
   public String[][] getSchedule() {
@@ -84,7 +83,7 @@ public class Human {
   public String toString() {
     return "Human{name=" + name + ", surname="
             + surname + ", year=" + year
-            + ", iq=" + iq + ", \nschedule" + Arrays.deepToString(schedule) + "}";
+            + ", iq=" + iq + ", schedule" + Arrays.deepToString(schedule) + "}";
   }
 
   @Override

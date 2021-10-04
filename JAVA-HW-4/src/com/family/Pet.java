@@ -26,26 +26,6 @@ public class Pet {
 
   }
 
-  public String getSpecies() {
-    return species;
-  }
-
-  public String getNickname() {
-    return nickname;
-  }
-
-  public int getAge() {
-    return age;
-  }
-
-  public int getTrickLevel() {
-    return trickLevel;
-  }
-
-  public String[] getHabits() {
-    return habits;
-  }
-
   public void setSpecies(String species) {
     this.species = species;
   }
@@ -64,6 +44,26 @@ public class Pet {
 
   public void setHabits(String[] habits) {
     this.habits = habits;
+  }
+
+  public String getSpecies() {
+    return species;
+  }
+
+  public String getNickname() {
+    return nickname;
+  }
+
+  public int getAge() {
+    return age;
+  }
+
+  public int getTrickLevel() {
+    return trickLevel;
+  }
+
+  public String[] getHabits() {
+    return habits;
   }
 
   @Override

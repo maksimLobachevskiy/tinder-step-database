@@ -10,11 +10,10 @@ public class Family {
 
   public Family(Human mother, Human father) {
     this.mother = mother;
-    this.father = father;
-    this.pet = new Pet("", "");
-    this.children = new Human[]{};
     this.mother.setFamily(this);
+    this.father = father;
     this.father.setFamily(this);
+
   }
 
   public Family(Human mother, Human father, Human[] children, Pet pet) {
@@ -24,49 +23,55 @@ public class Family {
     this.pet = pet;
   }
 
-  public Human getMother() {
-    return mother;
-  }
-
-  public Human getFather() {
-    return father;
-  }
-
-  public Human[] getChildren() {
-    return children;
-  }
-
-  public Pet getPet() {
-    return pet;
-  }
-
   public void setMother(Human mother) {
     this.mother = mother;
+  }
+
+  public Human getMother() {
+    return mother;
   }
 
   public void setFather(Human father) {
     this.father = father;
   }
 
+  public Human getFather() {
+    return father;
+  }
+
   public void setChildren(Human[] children) {
     this.children = children;
+  }
+
+  public Human[] getChildren() {
+    return children;
   }
 
   public void setPet(Pet pet) {
     this.pet = pet;
   }
 
-  public void addChild(Human[] children, Human child) {
-    child.setFamily(this);
-    Human[] newBornChildren = Arrays.copyOf(children, getChildren().length + 1);
-    newBornChildren[newBornChildren.length - 1] = child;
-    setChildren(newBornChildren);
+  public Pet getPet() {
+    return pet;
   }
 
-  public boolean deleteChild(int childIndex, Human[] children) {
-    for (int i = childIndex; i < children.length - 1; i++) {
-      children[i] = children[i + 1];
+  public void greetPet() {
+    System.out.println("Hi, " + getPet().getNickname());
+  }
+
+
+  public void addChild(Human child) {
+    this.children = Arrays.copyOf(children, children.length + 1);
+    children[children.length - 1] = child;
+    child.setFamily(this);
+  }
+
+  public boolean deleteChild(int childIndex) {
+    if (childIndex >= children.length || childIndex < 0) {
+      return false;
     }
+    if (children.length - 1 - childIndex >= 0)
+      System.arraycopy(children, childIndex + 1, children, childIndex, children.length - 1 - childIndex);
     Human[] newChildren = Arrays.copyOf(children, children.length - 1);
     setChildren(newChildren);
     return true;
@@ -87,10 +92,6 @@ public class Family {
             + Arrays.toString(children)
             + " \nPets: "
             + pet.toString();
-  }
-
-  public void greetPet() {
-    System.out.println("Hi, " + this.getPet().getNickname());
   }
 
 

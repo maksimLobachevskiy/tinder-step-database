@@ -28,11 +28,12 @@ public class Main {
     Family myFamily = new Family(mother, father, new Human[]{daughter1, daughter2}, parrot);
     System.out.println(myFamily);
     myFamily.countFamily(myFamily);
-    myFamily.addChild(myFamily.getChildren(), new Human("Mira", "Lobachevska", 3, 80,
+    Human Mira = new Human("Mira", "Lobachevska", 3, 80,
             new String[][]{{"Monday", "Go" +
                     " to kindergarten"}, {"Tuesday", "Go to kindergarten"}, {"Wednesday", "Go to kindergarten"},
                     {"Thursday", "Go to kindergarten"}, {"Friday", "Go to kindergarten"}, {
-                    "Satuday", "Day-off"}}));
+                    "Satuday", "Day-off"}});
+    myFamily.addChild(Mira);
     System.out.println(myFamily);
     //Family count after adding a child
     myFamily.countFamily(myFamily);
@@ -40,7 +41,7 @@ public class Main {
     ///Pet greeting method
     myFamily.greetPet();
     /////After deleting child
-    System.out.println(myFamily.deleteChild(0, myFamily.getChildren()));
+    System.out.println(myFamily.deleteChild(2));
     //Family count after deleting a child
     myFamily.countFamily(myFamily);
     //Family composition after deletion

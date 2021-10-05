@@ -75,8 +75,8 @@ public class Human {
     this.schedule = schedule;
   }
 
-  public void trickLevel() {
-
+  public void greetPet() {
+    System.out.println("Hi, " + family.getPet().getNickname());
   }
 
   @Override

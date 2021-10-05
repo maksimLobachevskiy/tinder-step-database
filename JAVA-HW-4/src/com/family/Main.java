@@ -39,7 +39,7 @@ public class Main {
     myFamily.countFamily(myFamily);
     myFamily.describePet();
     ///Pet greeting method
-    myFamily.greetPet();
+    father.greetPet();
     /////After deleting child
     System.out.println(myFamily.deleteChild(2));
     //Family count after deleting a child

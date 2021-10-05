@@ -13,12 +13,13 @@ public class Family {
     this.mother.setFamily(this);
     this.father = father;
     this.father.setFamily(this);
-
   }
 
   public Family(Human mother, Human father, Human[] children, Pet pet) {
     this.mother = mother;
+    this.mother.setFamily(this);
     this.father = father;
+    this.father.setFamily(this);
     this.children = children;
     this.pet = pet;
   }
@@ -54,11 +55,6 @@ public class Family {
   public Pet getPet() {
     return pet;
   }
-
-  public void greetPet() {
-    System.out.println("Hi, " + getPet().getNickname());
-  }
-
 
   public void addChild(Human child) {
     this.children = Arrays.copyOf(children, children.length + 1);

@@ -13,6 +13,7 @@ public class Family {
     this.mother.setFamily(this);
     this.father = father;
     this.father.setFamily(this);
+    this.children = new Human[0];
   }
 
   public Family(Human mother, Human father, Human[] children, Pet pet) {
@@ -89,6 +90,13 @@ public class Family {
             + pet.toString();
   }
 
+  public void describePet() {
+    System.out.println("We have a(an) "
+            + getPet().getSpecies()
+            + ", he is " + getPet().getAge()
+            + " years old, he is " + (getPet().getTrickLevel() <= 50 ? "almost not tricky" :
+            "very tricky"));
+  }
 
   @Override
   public int hashCode() {
@@ -107,11 +115,8 @@ public class Family {
     return (mother.hashCode() == myFamily.getMother().hashCode());
   }
 
-  public void describePet() {
-    System.out.println("We have a(an) "
-            + getPet().getSpecies()
-            + ", he is " + getPet().getAge()
-            + " years old, he is " + (getPet().getTrickLevel() <= 50 ? "almost not tricky" :
-            "very tricky"));
+  @Override
+  protected void finalize() {
+    System.out.println(this.toString() + "was deleted");
   }
 }

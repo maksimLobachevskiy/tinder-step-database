@@ -36,14 +36,14 @@ public class Main {
     myFamily.addChild(Mira);
     System.out.println(myFamily);
     //Family count after adding a child
-    myFamily.countFamily(myFamily);
+    System.out.println("The family consists of " + myFamily.countFamily(myFamily) + " members");
     myFamily.describePet();
     ///Pet greeting method
     father.greetPet();
     /////After deleting child
     System.out.println(myFamily.deleteChild(2));
     //Family count after deleting a child
-    myFamily.countFamily(myFamily);
+    System.out.println("The family consists of " + myFamily.countFamily(myFamily) + " members");
     //Family composition after deletion
     System.out.println(myFamily);
   }

@@ -13,6 +13,7 @@ public class Family {
     this.mother.setFamily(this);
     this.father = father;
     this.father.setFamily(this);
+    this.children = new Human[0];
   }
 
   public Family(Human mother, Human father, Human[] children, Pet pet) {

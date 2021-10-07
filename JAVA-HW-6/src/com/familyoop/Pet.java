@@ -57,7 +57,7 @@ public abstract class Pet {
 
   @Override
   public String toString() {
-    return getSpecies() + "{nickname="
+    return (getSpecies() == null ? Species.UNKNOWN : getSpecies()) + "{nickname="
             + this.getNickname() + ", age="
             + this.getAge() + ", trickLevel="
             + this.getTrickLevel() + ", habits="

@@ -7,7 +7,6 @@ public abstract class Pet {
   private int age;
   private int trickLevel;
   private String[] habits;
-  private Species species = Species.UNKNOWN;
 
 
   public Pet(String nickname) {
@@ -48,14 +47,6 @@ public abstract class Pet {
     this.trickLevel = trickLevel;
   }
 
-  public void setSpecies(Species species) {
-    this.species = species;
-  }
-
-  public Species getSpecies() {
-    return species;
-  };
-
   public String[] getHabits() {
     return habits;
   }
@@ -66,7 +57,7 @@ public abstract class Pet {
 
   @Override
   public String toString() {
-    return this.species + "{nickname="
+    return (getSpecies() == null ? Species.UNKNOWN : getSpecies()) + "{nickname="
             + this.getNickname() + ", age="
             + this.getAge() + ", trickLevel="
             + this.getTrickLevel() + ", habits="
@@ -78,6 +69,8 @@ public abstract class Pet {
   }
 
   public abstract void respond();
+
+  public abstract String getSpecies();
 
   @Override
   protected void finalize() {

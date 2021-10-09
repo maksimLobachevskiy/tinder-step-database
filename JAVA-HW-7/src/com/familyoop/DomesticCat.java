@@ -1,9 +1,7 @@
 package com.familyoop;
 
-import java.util.Arrays;
-
 public class DomesticCat extends Pet implements FoulHabits {
-  private final Species species = Species.DOMESTIC_CAT;
+  private final String species = Species.DOMESTIC_CAT.toString();
 
   public DomesticCat(String nickname, int age, int trickLevel, String[] habits) {
     super(nickname, age, trickLevel, habits);
@@ -20,11 +18,7 @@ public class DomesticCat extends Pet implements FoulHabits {
   }
 
   @Override
-  public String toString() {
-    return this.species + "{nickname="
-            + this.getNickname() + ", age="
-            + this.getAge() + ", trickLevel="
-            + this.getTrickLevel() + ", habits="
-            + Arrays.toString(this.getHabits()) + "}";
+  public String getSpecies() {
+    return this.species;
   }
 }

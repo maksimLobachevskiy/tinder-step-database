@@ -1,10 +1,8 @@
 package com.familyoop;
 
-import java.util.Arrays;
-
 public class Dog extends Pet implements FoulHabits {
 
-  private final Species species = Species.DOG;
+  private final String species = Species.DOG.toString();
 
   public Dog(String nickname, int age, int trickLevel, String[] habits) {
     super(nickname, age, trickLevel, habits);
@@ -21,12 +19,9 @@ public class Dog extends Pet implements FoulHabits {
     System.out.println("Woof-woof! I am - " + getNickname() + ". I can wag my tail when I see my " +
             "master !");
   }
+
   @Override
-  public String toString() {
-    return this.species + "{nickname="
-            + this.getNickname() + ", age="
-            + this.getAge() + ", trickLevel="
-            + this.getTrickLevel() + ", habits="
-            + Arrays.toString(this.getHabits()) + "}";
+  public String getSpecies() {
+    return this.species;
   }
 }

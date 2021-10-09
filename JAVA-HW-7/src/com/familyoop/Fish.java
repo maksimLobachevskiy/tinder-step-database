@@ -1,10 +1,8 @@
 package com.familyoop;
 
-import java.util.Arrays;
-
 public class Fish extends Pet {
 
-  private final Species species = Species.FISH;
+  private final String species = Species.FISH.toString();
 
   public Fish(String nickname, int age, int trickLevel, String[] habits) {
     super(nickname, age, trickLevel, habits);
@@ -16,13 +14,7 @@ public class Fish extends Pet {
   }
 
   @Override
-  public String toString() {
-    return this.species + "{nickname="
-            + this.getNickname() + ", age="
-            + this.getAge() + ", trickLevel="
-            + this.getTrickLevel() + ", habits="
-            + Arrays.toString(this.getHabits()) + "}";
+  public String getSpecies() {
+    return this.species;
   }
-
-
 }

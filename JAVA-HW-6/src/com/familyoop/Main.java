@@ -12,7 +12,7 @@ public class Main {
     Family family = new Family(mother, father, new Human[]{daughter}, fish);
 
     DomesticCat cat = new DomesticCat("Jack", 4, 60, new String[]{"scratch"});
-Pet dog = new Dog("billy", 5, 60, new String[]{"barking"});
+Dog dog = new Dog("billy", 5, 60, new String[]{"barking"});
     System.out.println(father);
     father.greetPet();
     father.repairCar();
@@ -27,5 +27,6 @@ Pet dog = new Dog("billy", 5, 60, new String[]{"barking"});
     cat.foul();
     cat.respond();
     System.out.println(dog);
+    dog.respond();
   }
 }

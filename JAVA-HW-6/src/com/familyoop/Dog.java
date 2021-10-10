@@ -18,7 +18,7 @@ public class Dog extends Pet implements FoulHabits {
 
   @Override
   public void respond() {
-    System.out.println("Woof-woof! I am - " + getNickname() + ". I can wag my tail when I see my " +
+    System.out.println("Woof-woof! I am - " + this.species + ". I can wag my tail when I see my " +
             "master !");
   }
   @Override

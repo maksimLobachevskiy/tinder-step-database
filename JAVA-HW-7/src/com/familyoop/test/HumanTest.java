@@ -1,5 +1,5 @@
 package com.familyoop.test;
-import com.familyoop.Human;
+import com.familyoop.human.Human;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 

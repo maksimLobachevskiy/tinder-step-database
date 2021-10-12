@@ -1,5 +1,8 @@
 package com.familyoop;
 
+import com.familyoop.human.*;
+import com.familyoop.pets.*;
+
 public class Main {
   public static void main(String[] args) {
     Man father = new Man("Maksim", "Lobachevskiy", 1984, 100, new String[][]

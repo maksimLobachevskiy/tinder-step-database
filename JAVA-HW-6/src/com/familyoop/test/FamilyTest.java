@@ -1,8 +1,8 @@
 package com.familyoop.test;
 
-import com.familyoop.Family;
-import com.familyoop.Fish;
-import com.familyoop.Human;
+import com.familyoop.human.Family;
+import com.familyoop.pets.Fish;
+import com.familyoop.human.Human;
 import org.junit.Test;
 import java.util.Arrays;
 import static org.junit.Assert.assertEquals;

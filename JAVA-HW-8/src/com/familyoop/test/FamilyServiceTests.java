@@ -1,0 +1,152 @@
+package com.familyoop.test;
+
+import com.familyoop.human.Family;
+import com.familyoop.human.Human;
+import com.familyoop.pets.Fish;
+import com.familyoop.service.FamilyService;
+import org.junit.Assert;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
+public class FamilyServiceTests {
+  static FamilyService familyService;
+
+  //Test families difference
+  @Test
+  public void getAllFamiliesTestFail() {
+    FamilyService familyService = new FamilyService();
+    List<Family> families = new ArrayList<>();
+    Human mother = new Human("Olena", "Lobachevska", 1986);
+    Human father = new Human("Maksym", "Lobachevskyi", 1984);
+    Family family = familyService.createNewFamily(mother, father);
+    Human mother2 = new Human("Oksana", "Egorova", 1986);
+    Human father2 = new Human("Oleg", "Egorov", 1984);
+    Family family2 = familyService.createNewFamily(mother2, father2);
+    families.add(family);
+    familyService.getAllFamilies();
+    Assert.assertNotSame(familyService.getAllFamilies(), families);
+  }
+
+  @Test
+  public void getAllFamiliesTestTrue() {
+    FamilyService familyService = new FamilyService();
+    List<Family> families = new ArrayList<>();
+    Human mother = new Human("Olena", "Lobachevska", 1986);
+    Human father = new Human("Maksym", "Lobachevskyi", 1984);
+    Family family = familyService.createNewFamily(mother, father);
+    Human mother2 = new Human("Oksana", "Egorova", 1986);
+    Human father2 = new Human("Oleg", "Egorov", 1984);
+    Family family2 = familyService.createNewFamily(mother2, father2);
+    families.add(family);
+    families.add(family2);
+    familyService.getAllFamilies();
+    Assert.assertEquals(familyService.getAllFamilies(), families);
+  }
+
+  @Test
+  public void createNewFamilyTest() {
+    FamilyService familyService = new FamilyService();
+    Human mother = new Human("Olena", "Lobachevska", 1986);
+    Human father = new Human("Maksym", "Lobachevskyi", 1984);
+    Family family = familyService.createNewFamily(mother, father);
+    String expected = "This is the family of Lobachevskyi\n" +
+            "Mother: Human{name=Olena, surname=Lobachevska, year=1986, iq=0, schedulenull} \n" +
+            "Father: Human{name=Maksym, surname=Lobachevskyi, year=1984, iq=0, schedulenull} \n" +
+            "Children: No children in this Family \n" +
+            "Pets: []";
+    Assert.assertEquals(family.toString(), expected);
+  }
+
+  //Number of families test
+  @Test
+  public void countTest() {
+    FamilyService familyService = new FamilyService();
+    Human mother = new Human("Olena", "Lobachevska", 1986);
+    Human father = new Human("Maksym", "Lobachevskyi", 1984);
+    Family family = familyService.createNewFamily(mother, father);
+    Human mother2 = new Human("Oksana", "Egorova", 1986);
+    Human father2 = new Human("Oleg", "Egorov", 1984);
+    Family family2 = familyService.createNewFamily(mother2, father2);
+    int expected = 2;
+    Assert.assertEquals(expected, familyService.count());
+  }
+
+  //Test deleteFamilyByIndex
+  @Test
+  public void deleteFamilyByIndexTest() {
+    FamilyService familyService = new FamilyService();
+    Human mother = new Human("Olena", "Lobachevska", 1986);
+    Human father = new Human("Maksym", "Lobachevskyi", 1984);
+    Family family = familyService.createNewFamily(mother, father);
+    Human mother2 = new Human("Oksana", "Egorova", 1986);
+    Human father2 = new Human("Oleg", "Egorov", 1984);
+    Family family2 = familyService.createNewFamily(mother2, father2);
+    familyService.deleteFamilyByIndex(0);
+    int expected = 1;
+    Assert.assertEquals(expected, familyService.count());
+  }
+
+  @Test
+  public void getFamilyByIdTest() {
+    FamilyService familyService = new FamilyService();
+    Human mother = new Human("Olena", "Lobachevska", 1986);
+    Human father = new Human("Maksym", "Lobachevskyi", 1984);
+    Family family = familyService.createNewFamily(mother, father);
+    Human mother2 = new Human("Oksana", "Egorova", 1986);
+    Human father2 = new Human("Oleg", "Egorov", 1984);
+    Family family2 = familyService.createNewFamily(mother2, father2);
+    Assert.assertEquals(family, familyService.getFamilyById(0));
+  }
+
+  @Test
+  public void addPetTest() {
+    FamilyService familyService = new FamilyService();
+    Human mother = new Human("Olena", "Lobachevska", 1986);
+    Human father = new Human("Maksym", "Lobachevskyi", 1984);
+    Family family = familyService.createNewFamily(mother, father);
+    Fish fish = new Fish("Gosha", 7, 40, new HashSet<>(List.of("Flying and sitting high on furniture", "Eating from " +
+            "family's " +
+            "plates")));
+    familyService.addPet(0, fish);
+    int expected = 1;
+    Assert.assertEquals(expected, family.getPet().size());
+  }
+
+  @Test
+  public void getPetTest() {
+    FamilyService familyService = new FamilyService();
+    Human mother = new Human("Olena", "Lobachevska", 1986);
+    Human father = new Human("Maksym", "Lobachevskyi", 1984);
+    Family family = familyService.createNewFamily(mother, father);
+    Fish fish = new Fish("Gosha", 7, 40, new HashSet<>(List.of("Flying and sitting high on furniture", "Eating from " +
+            "family's " +
+            "plates")));
+    familyService.addPet(0, fish);
+    Assert.assertArrayEquals(family.getPet().toArray(), familyService.getPets(0).toArray());
+  }
+
+  @Test
+  public void bornChildTest() {
+    FamilyService familyService = new FamilyService();
+    Human mother = new Human("Olena", "Lobachevska", 1986);
+    Human father = new Human("Maksym", "Lobachevskyi", 1984);
+    Family family = familyService.createNewFamily(mother, father);
+    familyService.bornChild(family, "Borya", "Sveta");
+    Assert.assertEquals(1, family.getChildren().size());
+  }
+
+  @Test
+  public void adoptChildTest() {
+    FamilyService familyService = new FamilyService();
+    Human mother = new Human("Olena", "Lobachevska", 1986);
+    Human father = new Human("Maksym", "Lobachevskyi", 1984);
+    Family family = familyService.createNewFamily(mother, father);
+    Human Marharyta = new Human("Marharyta", "Lobachevska", 2012);
+    familyService.adoptChild(family, Marharyta);
+    Assert.assertEquals(3, familyService.getFamilyById(0).countFamily(family));
+  }
+
+}

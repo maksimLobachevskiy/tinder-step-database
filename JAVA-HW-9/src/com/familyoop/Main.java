@@ -57,5 +57,7 @@ public class Main {
     System.out.println(father.describeAge());
     System.out.println(mother.describeAge());
     System.out.println(daughter.describeAge());
+    //Example of birthdate in long Unix Millis Timestamp
+    System.out.println(father.getBirthDate());
   }
 }

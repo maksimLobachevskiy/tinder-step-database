@@ -39,7 +39,12 @@ public class CollectionFamilyDao implements FamilyDao {
 
   @Override
   public Family saveFamily(Family family) {
-    this.familyList.add(family);
+    int index = this.familyList.indexOf(family);
+    if (this.familyList.contains(family)) {
+      this.familyList.set(index, family);
+    } else {
+      this.familyList.add(family);
+    }
     return family;
   }
 

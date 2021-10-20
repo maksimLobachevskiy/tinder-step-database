@@ -55,5 +55,6 @@ public class Main {
     familyController.deleteAllChildrenOlderThen(3);
     familyController.displayAllFamilies();
     System.out.println(familyController.getFamilyById(0));
+    
   }
 }

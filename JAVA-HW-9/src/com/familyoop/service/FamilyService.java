@@ -81,6 +81,7 @@ public class FamilyService {
   public void addPet(int index, Pet pet) {
     Family family = familyDao.getFamilyByIndex(index);
     family.getPet().add(pet);
+    familyDao.saveFamily(family);
   }
 
   public Family bornChild(Family family, String boy, String girl) {
@@ -92,12 +93,13 @@ public class FamilyService {
       family.getChildren().add(new Woman(girl, family.getFather().getSurname(), "10/10/2021"));
     }
     family.setChildren(children);
-
+    familyDao.saveFamily(family);
     return family;
   }
 
   public Family adoptChild(Family family, Human child) {
     family.addChild(child);
+    familyDao.saveFamily(family);
     return family;
   }
 
@@ -105,6 +107,7 @@ public class FamilyService {
     for (Family family : this.getAllFamilies()) {
       List<Human> children = family.getChildren();
       children.removeIf(child -> (LocalDate.now().getYear() - child.getBirthDate()) > age);
+      familyDao.saveFamily(family);
     }
   }
 }

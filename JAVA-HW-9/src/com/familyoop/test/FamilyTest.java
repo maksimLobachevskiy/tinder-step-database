@@ -21,7 +21,7 @@ public class FamilyTest {
     Family family = new Family(mother, father);
     Human Marharyta = new Human("Marharyta", "Lobachevska", "10/10/1986");
     family.addChild(Marharyta);
-    String expected = "[Human{name=Marharyta, surname=Lobachevska, year=2012, iq=0, schedulenull}]";
+    String expected = "[Human{name=Marharyta, surname=Lobachevska, birthday=10/10/1986, iq=0, schedulenull}]";
     assertEquals(expected, (family.getChildren()).toString());
   }
 

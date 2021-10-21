@@ -11,11 +11,8 @@ import com.familyoop.pets.Pet;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class FamilyService {
   private final FamilyDao familyDao;
@@ -96,7 +93,6 @@ public class FamilyService {
 
   public void deleteAllChildrenOlderThen(int age) {
     this.getAllFamilies().stream().peek(family -> {
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
       family.getChildren()
       .removeIf(child -> (LocalDate.now().getYear() - Instant.ofEpochMilli(child.getBirthDate())
               .atZone(ZoneId.systemDefault()).toLocalDate().getYear()) > age);

@@ -16,10 +16,9 @@ import java.util.Set;
 public class FamilyService {
   private final FamilyDao familyDao;
 
-  public FamilyService() {
-    familyDao = new CollectionFamilyDao();
+  public FamilyService(CollectionFamilyDao familyDao) {
+    this.familyDao = familyDao;
   }
-
 
   public List<Family> getAllFamilies() {
     return familyDao.getAllFamilies();

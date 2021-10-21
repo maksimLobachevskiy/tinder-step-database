@@ -1,5 +1,6 @@
 package com.familyoop.test;
 
+import com.familyoop.dao.CollectionFamilyDao;
 import com.familyoop.human.Family;
 import com.familyoop.human.Human;
 import com.familyoop.pets.Fish;
@@ -14,10 +15,12 @@ import java.util.List;
 public class FamilyServiceTests {
   static FamilyService familyService;
 
+
   //Test families difference
   @Test
   public void getAllFamiliesTestFail() {
-    FamilyService familyService = new FamilyService();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
     List<Family> families = new ArrayList<>();
     Human mother = new Human("Olena", "Lobachevska", 1986);
     Human father = new Human("Maksym", "Lobachevskyi", 1984);
@@ -32,7 +35,8 @@ public class FamilyServiceTests {
 
   @Test
   public void getAllFamiliesTestTrue() {
-    FamilyService familyService = new FamilyService();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
     List<Family> families = new ArrayList<>();
     Human mother = new Human("Olena", "Lobachevska", 1986);
     Human father = new Human("Maksym", "Lobachevskyi", 1984);
@@ -48,7 +52,8 @@ public class FamilyServiceTests {
 
   @Test
   public void createNewFamilyTest() {
-    FamilyService familyService = new FamilyService();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
     Human mother = new Human("Olena", "Lobachevska", 1986);
     Human father = new Human("Maksym", "Lobachevskyi", 1984);
     Family family = familyService.createNewFamily(mother, father);
@@ -63,7 +68,8 @@ public class FamilyServiceTests {
   //Number of families test
   @Test
   public void countTest() {
-    FamilyService familyService = new FamilyService();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
     Human mother = new Human("Olena", "Lobachevska", 1986);
     Human father = new Human("Maksym", "Lobachevskyi", 1984);
     Family family = familyService.createNewFamily(mother, father);
@@ -77,7 +83,8 @@ public class FamilyServiceTests {
   //Test deleteFamilyByIndex
   @Test
   public void deleteFamilyByIndexTest() {
-    FamilyService familyService = new FamilyService();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
     Human mother = new Human("Olena", "Lobachevska", 1986);
     Human father = new Human("Maksym", "Lobachevskyi", 1984);
     Family family = familyService.createNewFamily(mother, father);
@@ -91,7 +98,8 @@ public class FamilyServiceTests {
 
   @Test
   public void getFamilyByIdTest() {
-    FamilyService familyService = new FamilyService();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
     Human mother = new Human("Olena", "Lobachevska", 1986);
     Human father = new Human("Maksym", "Lobachevskyi", 1984);
     Family family = familyService.createNewFamily(mother, father);
@@ -103,7 +111,8 @@ public class FamilyServiceTests {
 
   @Test
   public void addPetTest() {
-    FamilyService familyService = new FamilyService();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
     Human mother = new Human("Olena", "Lobachevska", 1986);
     Human father = new Human("Maksym", "Lobachevskyi", 1984);
     Family family = familyService.createNewFamily(mother, father);
@@ -117,7 +126,8 @@ public class FamilyServiceTests {
 
   @Test
   public void getPetTest() {
-    FamilyService familyService = new FamilyService();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
     Human mother = new Human("Olena", "Lobachevska", 1986);
     Human father = new Human("Maksym", "Lobachevskyi", 1984);
     Family family = familyService.createNewFamily(mother, father);
@@ -130,7 +140,8 @@ public class FamilyServiceTests {
 
   @Test
   public void bornChildTest() {
-    FamilyService familyService = new FamilyService();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
     Human mother = new Human("Olena", "Lobachevska", 1986);
     Human father = new Human("Maksym", "Lobachevskyi", 1984);
     Family family = familyService.createNewFamily(mother, father);
@@ -140,7 +151,8 @@ public class FamilyServiceTests {
 
   @Test
   public void adoptChildTest() {
-    FamilyService familyService = new FamilyService();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
     Human mother = new Human("Olena", "Lobachevska", 1986);
     Human father = new Human("Maksym", "Lobachevskyi", 1984);
     Family family = familyService.createNewFamily(mother, father);

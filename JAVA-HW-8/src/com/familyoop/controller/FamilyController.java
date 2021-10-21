@@ -11,8 +11,8 @@ import java.util.Set;
 public class FamilyController {
   public FamilyService familyService;
 
-  public FamilyController() {
-    familyService = new FamilyService();
+  public FamilyController(FamilyService familyService) {
+    this.familyService = familyService;
   }
 
 

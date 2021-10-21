@@ -1,14 +1,19 @@
 package com.familyoop;
 
 import com.familyoop.controller.FamilyController;
+import com.familyoop.dao.CollectionFamilyDao;
+import com.familyoop.dao.FamilyDao;
 import com.familyoop.human.*;
 import com.familyoop.pets.*;
+import com.familyoop.service.FamilyService;
 
 import java.util.*;
 
 public class Main {
   public static void main(String[] args) {
-    FamilyController familyController = new FamilyController();
+    CollectionFamilyDao familyDao = new CollectionFamilyDao();
+    FamilyService familyService = new FamilyService(familyDao);
+    FamilyController familyController = new FamilyController(familyService);
     Man father = new Man("Maksim", "Lobachevskiy", 1984, 100,
             new HashMap<>() {{
               put(DayOfWeek.MONDAY, "Go to work");
@@ -55,6 +60,6 @@ public class Main {
     familyController.deleteAllChildrenOlderThen(3);
     familyController.displayAllFamilies();
     System.out.println(familyController.getFamilyById(0));
-    
+
   }
 }

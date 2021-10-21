@@ -11,9 +11,11 @@ import com.familyoop.pets.Pet;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class FamilyService {
   private final FamilyDao familyDao;
@@ -29,8 +31,8 @@ public class FamilyService {
   }
 
   public void displayAllFamilies() {
-    List<Family> allFamilies = this.getAllFamilies();
-    System.out.println("All current families: " + allFamilies);
+  this.getAllFamilies().forEach(System.out::println);
+
   }
 
   public Family createNewFamily(Human mother, Human father) {
@@ -39,29 +41,15 @@ public class FamilyService {
   }
 
   public void getFamiliesBiggerThan(int number) {
-    for (Family p : this.getAllFamilies()) {
-      if (p.countFamily(p) > number) {
-        System.out.println("Families with members bigger than: " + number + " - \n" + p);
-      }
-    }
+    this.getAllFamilies().stream().filter(p -> p.countFamily(p) > number).forEach(System.out::println);
   }
 
   public void getFamiliesLessThan(int number) {
-    for (Family p : this.getAllFamilies()) {
-      if (p.countFamily(p) < number) {
-        System.out.println("Families with members less than: " + number + " - \n" + p);
-      }
-    }
+    this.getAllFamilies().stream().filter(p -> p.countFamily(p) < number).forEach(System.out::println);
   }
 
   public int countFamiliesWithMemberNumber(int number) {
-    List<Family> families = new ArrayList<>();
-    for (Family p : this.getAllFamilies()) {
-      if (p.countFamily(p) == number) {
-        families.add(p);
-      }
-    }
-    return families.size();
+    return (int) this.getAllFamilies().stream().filter(p -> p.countFamily(p) == number).count();
   }
 
   public void deleteFamilyByIndex(int index) {
@@ -107,11 +95,11 @@ public class FamilyService {
   }
 
   public void deleteAllChildrenOlderThen(int age) {
-    for (Family family : this.getAllFamilies()) {
-      List<Human> children = family.getChildren();
-      children.removeIf(child -> (LocalDate.now().getYear() - Instant.ofEpochMilli(child.getBirthDate())
+    this.getAllFamilies().stream().peek(family -> {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      family.getChildren()
+      .removeIf(child -> (LocalDate.now().getYear() - Instant.ofEpochMilli(child.getBirthDate())
               .atZone(ZoneId.systemDefault()).toLocalDate().getYear()) > age);
-      familyDao.saveFamily(family);
-    }
-  }
+    }).forEach(familyDao::saveFamily);
+ }
 }

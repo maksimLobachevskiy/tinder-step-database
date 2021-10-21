@@ -44,26 +44,22 @@ public class Main {
     Family family2 = familyController.createNewFamily(father2, mother2);
     familyController.bornChild(family, "Misha", "Mariia");
     familyController.displayAllFamilies();
+    System.out.println("Families less than: ");
     familyController.getFamiliesLessThan(3);
+    System.out.println("Families bigger than: ");
     familyController.getFamiliesBiggerThan(2);
-    System.out.println(familyController.countFamiliesWithMemberNumber(2));
-    familyController.deleteFamilyByIndex(0);
-    System.out.println(familyController.count());
-    System.out.println(familyController.getFamilyById(0));
-    familyController.addPet(0, fish2);
-    familyController.adoptChild(family2, daughter);
-    //Show families after adding pet and child adoption
+    System.out.println("Count families: ");
+   System.out.println(familyController.countFamiliesWithMemberNumber(2));
+//    familyController.deleteFamilyByIndex(0);
+//    System.out.println(familyController.count());
+//    System.out.println(familyController.getFamilyById(0));
+//    familyController.addPet(0, fish2);
+    familyController.adoptChild(family, daughter);
+//    //Show families after adding pet and child adoption
+//    familyController.displayAllFamilies();
+    familyController.deleteAllChildrenOlderThen(2);
+    //Display families after children deletion
     familyController.displayAllFamilies();
-    familyController.deleteAllChildrenOlderThen(3);
-    System.out.println("Display families after deletion");
-    familyController.displayAllFamilies();
-    System.out.println(familyController.getFamilyById(0));
 
-    //Describe Age method example
-    System.out.println(father.describeAge());
-    System.out.println(mother.describeAge());
-    System.out.println(daughter.describeAge());
-    //Example of birthdate in long Unix Millis Timestamp
-    System.out.println(father.getBirthDate());
   }
 }

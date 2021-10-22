@@ -28,8 +28,7 @@ public class FamilyService {
   }
 
   public void displayAllFamilies() {
-  this.getAllFamilies().forEach(System.out::println);
-
+  this.getAllFamilies().stream().peek(System.out::println).forEach(System.out::println);
   }
 
   public Family createNewFamily(Human mother, Human father) {

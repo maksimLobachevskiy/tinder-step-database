@@ -6,6 +6,7 @@ import com.familyoop.exceptions.FamilyOverflowException;
 import com.familyoop.human.*;
 import com.familyoop.service.FamilyService;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -19,13 +20,13 @@ public class Main {
   public static FamilyService familyService = new FamilyService(familyDao);
   public static FamilyController familyController = new FamilyController(familyService);
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     System.out.println(("Welcome to Family Generator Game").toUpperCase());
     selectMenuItem();
   }
 
 
-  public static void selectMenuItem() {
+  public static void selectMenuItem() throws IOException {
     boolean exit = false;
     do {
       menu();
@@ -49,7 +50,7 @@ public class Main {
 
   }
 
-  public static void firstOption(int count) {
+  public static void firstOption(int count) throws IOException {
     ArrayList<String> womanNames = new ArrayList<>(List.of("Olena", "Oksana", "Marina", "Irina", "Margo"));
     ArrayList<String> manNames = new ArrayList<>(List.of("Maksim", "Oleg", "Vadim", "Alex", "Sergey"));
     ArrayList<String> surnames = new ArrayList<>(List.of("Lobachevskiy", "Egorov", "Ivanov", "Petrov", "Sechenov"));
@@ -80,18 +81,20 @@ public class Main {
       Human child = new Woman(womanNames.get(indexWomanName), surnames.get(indexSurname), birthDateChild,
               iq.get(indexIq));
       familyDao.saveFamily(new Family(mother, father, child));
-    }
 
+    }
+    familyDao.saveToFile(familyController.getAllFamilies());
   }
 
-  public static void secondOption() {
+  public static void secondOption() throws IOException {
     if (familyController.getAllFamilies().size() == 0) {
       System.out.println("No families in Database");
     }
-    familyController.displayAllFamilies();
+    familyController.loadData();
+
   }
 
-  public static void thirdOption() {
+  public static void thirdOption() throws IOException {
     System.out.println("Введите число");
     int number = input.nextInt();
     if (number > 5) {
@@ -111,7 +114,7 @@ public class Main {
       } else {
         familyController.getFamiliesLessThan(number);
       }
-    } catch (NumberFormatException ime) {
+    } catch (NumberFormatException | IOException ime) {
       System.out.println("Invalid number");
       fourthOption();
     }
@@ -129,13 +132,13 @@ public class Main {
         System.out.println("Enter number, greater than ZERO");
         fifthOption();
       }
-    } catch (NumberFormatException nfe) {
+    } catch (NumberFormatException | IOException nfe) {
       System.out.println("You entered the wrong number, please try again");
       fifthOption();
     }
   }
 
-  public static void sixthOption() {
+  public static void sixthOption() throws IOException {
     System.out.println("Enter mother's name");
     String motherName = input.nextLine();
     System.out.println("Enter mother's surname");
@@ -154,15 +157,15 @@ public class Main {
             motherBirthYear), motherIq);
 
     System.out.println("Enter father's name");
-    String fatherName = input.nextLine();
+    String fatherName = input.next();
     System.out.println("Enter father's surname");
-    String fatherSurname = input.nextLine();
+    String fatherSurname = input.next();
     System.out.println("Enter father's year of birth");
-    String fatherBirthYear = input.nextLine();
+    String fatherBirthYear = input.next();
     System.out.println("Enter father's months of birth");
-    String fatherBirthMonth = input.nextLine();
+    String fatherBirthMonth = input.next();
     System.out.println("Enter father's day of birth");
-    String fatherBirthDay = input.nextLine();
+    String fatherBirthDay = input.next();
     System.out.println("Enter father's IQ");
     int fatherIq = input.nextInt();
     if (fatherName.equals("") || fatherSurname.equals("") || fatherBirthDay.equals("") || fatherBirthYear.equals("") || fatherBirthMonth.equals(""))
@@ -170,6 +173,7 @@ public class Main {
     Man father = new Man(fatherName, fatherSurname, String.format("%s/%s/%S", fatherBirthDay, fatherBirthMonth,
             fatherBirthYear), fatherIq);
     familyController.createNewFamily(mother, father);
+    familyDao.saveToFile(familyController.getAllFamilies());
   }
 
   public static void seventhOption() {
@@ -182,7 +186,7 @@ public class Main {
         seventhOption();
       }
       familyController.deleteFamilyByIndex(familyId - 1);
-    } catch (NumberFormatException nfe) {
+    } catch (NumberFormatException | IOException nfe) {
       System.out.println("You entered the wrong number, please try again");
       seventhOption();
     }
@@ -210,7 +214,7 @@ public class Main {
           case "3" -> selectMenuItem();
         }
       }
-    } catch (NumberFormatException nfe) {
+    } catch (NumberFormatException | IOException nfe) {
       System.out.println("You entered the wrong number, please try again");
       eighthOption();
     }
@@ -227,7 +231,7 @@ public class Main {
         ninthOption();
       }
       familyController.deleteAllChildrenOlderThen(childAge);
-    } catch (NumberFormatException nfe) {
+    } catch (NumberFormatException | IOException nfe) {
       System.out.println("You entered the wrong number, please try again");
       ninthOption();
     }
@@ -244,7 +248,7 @@ public class Main {
     familyController.bornChild(family, boyName, girlName);
   }
 
-  public static void adoptChild() {
+  public static void adoptChild() throws IOException {
     System.out.println("Enter family ID");
     int familyId = input.nextInt();
     Family family = familyController.getFamilyById(familyId - 1);

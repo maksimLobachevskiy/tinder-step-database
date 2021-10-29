@@ -23,15 +23,14 @@ public class FamilyService {
   }
 
 
-  public List<Family> getAllFamilies() throws IOException {
-    return familyDao.loadData();
+  public List<Family> getAllFamilies(){
+    return this.familyDao.getAllFamilies();
   }
 
-  public void displayAllFamilies() throws IOException {
+  public void displayAllFamilies() {
     for (int i = 0; i < this.getAllFamilies().size(); i++) {
       System.out.println(i + 1 + "." + " " + getAllFamilies().get(i).prettyFormat());
     }
-    //this.getAllFamilies().stream().peek(System.out::println).forEach(p -> System.out.println(p.p));
   }
 
   public Family createNewFamily(Human mother, Human father) {
@@ -39,15 +38,15 @@ public class FamilyService {
     return familyDao.saveFamily(new Family(mother, father));
   }
 
-  public void getFamiliesBiggerThan(int number) throws IOException {
+  public void getFamiliesBiggerThan(int number) {
     this.getAllFamilies().stream().filter(p -> p.countFamily(p) > number).forEach(System.out::println);
   }
 
-  public void getFamiliesLessThan(int number) throws IOException {
+  public void getFamiliesLessThan(int number) {
     this.getAllFamilies().stream().filter(p -> p.countFamily(p) < number).forEach(System.out::println);
   }
 
-  public int countFamiliesWithMemberNumber(int number) throws IOException {
+  public int countFamiliesWithMemberNumber(int number) {
     return (int) this.getAllFamilies().stream().filter(p -> p.countFamily(p) == number).count();
   }
 
@@ -55,7 +54,7 @@ public class FamilyService {
     familyDao.deleteFamily(index);
   }
 
-  public int count() throws IOException {
+  public int count() {
     return this.getAllFamilies().size();
   }
 
@@ -68,11 +67,10 @@ public class FamilyService {
     return family.getPet();
   }
 
-  public void addPet(int index, Pet pet) throws IOException {
+  public void addPet(int index, Pet pet) {
     Family family = familyDao.getFamilyByIndex(index);
     family.getPet().add(pet);
     familyDao.saveFamily(family);
-    familyDao.saveToFile(this.getAllFamilies());
   }
 
   public Family bornChild(Family family, String boy, String girl) {
@@ -86,28 +84,24 @@ public class FamilyService {
     family.setChildren(children);
     familyDao.saveFamily(family);
     return family;
-
   }
 
-  public Family adoptChild(Family family, Human child) throws IOException {
+  public Family adoptChild(Family family, Human child) {
     family.addChild(child);
     familyDao.saveFamily(family);
-    familyDao.saveToFile(this.getAllFamilies());
     return family;
   }
 
-  public void deleteAllChildrenOlderThen(int age) throws IOException {
+  public void deleteAllChildrenOlderThen(int age) {
     this.getAllFamilies().stream().peek(family -> {
       family.getChildren()
               .removeIf(child -> (LocalDate.now().getYear() - Instant.ofEpochMilli(child.getBirthDate())
                       .atZone(ZoneId.systemDefault()).toLocalDate().getYear()) > age);
     }).forEach(familyDao::saveFamily);
-    familyDao.saveToFile(this.getAllFamilies());
   }
 
   public List<Family> loadData() throws IOException {
     return familyDao.loadData();
   }
-
 
 }

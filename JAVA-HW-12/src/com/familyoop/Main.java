@@ -4,6 +4,8 @@ import com.familyoop.controller.FamilyController;
 import com.familyoop.dao.CollectionFamilyDao;
 import com.familyoop.exceptions.FamilyOverflowException;
 import com.familyoop.human.*;
+import com.familyoop.pets.Dog;
+import com.familyoop.pets.Pet;
 import com.familyoop.service.FamilyService;
 
 import java.io.IOException;
@@ -34,7 +36,7 @@ public class Main {
       String optionUser = input.nextLine().toLowerCase();
 
       switch (optionUser) {
-        case "1" -> firstOption(4);
+        case "1" -> firstOption(2);
         case "2" -> secondOption();
         case "3" -> thirdOption();
         case "4" -> fourthOption();
@@ -43,14 +45,13 @@ public class Main {
         case "7" -> seventhOption();
         case "8" -> eighthOption();
         case "9" -> ninthOption();
+        case "10" -> tenthOption();
         case "exit" -> exit = true;
       }
-
     } while (!exit);
-
   }
 
-  public static void firstOption(int count) throws IOException {
+  public static void firstOption(int count) {
     ArrayList<String> womanNames = new ArrayList<>(List.of("Olena", "Oksana", "Marina", "Irina", "Margo"));
     ArrayList<String> manNames = new ArrayList<>(List.of("Maksim", "Oleg", "Vadim", "Alex", "Sergey"));
     ArrayList<String> surnames = new ArrayList<>(List.of("Lobachevskiy", "Egorov", "Ivanov", "Petrov", "Sechenov"));
@@ -80,21 +81,24 @@ public class Main {
               iq.get(indexIq));
       Human child = new Woman(womanNames.get(indexWomanName), surnames.get(indexSurname), birthDateChild,
               iq.get(indexIq));
-      familyDao.saveFamily(new Family(mother, father, child));
-
+      Pet dog = new Dog("sharik", 4, 40, new HashSet<>(List.of("swimming")));
+      familyDao.saveFamily(new Family(mother, father));
     }
-    familyDao.saveToFile(familyController.getAllFamilies());
   }
 
+  //Load data from FILE
   public static void secondOption() throws IOException {
-    if (familyController.getAllFamilies().size() == 0) {
-      System.out.println("No families in Database");
-    }
     familyController.loadData();
-
   }
 
-  public static void thirdOption() throws IOException {
+  //Load data from DB (DAO)
+  private static void tenthOption() {
+    System.out.println("DATA FROM DB:");
+    familyController.displayAllFamilies();
+  }
+
+
+  public static void thirdOption() {
     System.out.println("Введите число");
     int number = input.nextInt();
     if (number > 5) {
@@ -114,7 +118,7 @@ public class Main {
       } else {
         familyController.getFamiliesLessThan(number);
       }
-    } catch (NumberFormatException | IOException ime) {
+    } catch (NumberFormatException ime) {
       System.out.println("Invalid number");
       fourthOption();
     }
@@ -132,13 +136,13 @@ public class Main {
         System.out.println("Enter number, greater than ZERO");
         fifthOption();
       }
-    } catch (NumberFormatException | IOException nfe) {
+    } catch (NumberFormatException nfe) {
       System.out.println("You entered the wrong number, please try again");
       fifthOption();
     }
   }
 
-  public static void sixthOption() throws IOException {
+  public static void sixthOption() {
     System.out.println("Enter mother's name");
     String motherName = input.nextLine();
     System.out.println("Enter mother's surname");
@@ -173,7 +177,6 @@ public class Main {
     Man father = new Man(fatherName, fatherSurname, String.format("%s/%s/%S", fatherBirthDay, fatherBirthMonth,
             fatherBirthYear), fatherIq);
     familyController.createNewFamily(mother, father);
-    familyDao.saveToFile(familyController.getAllFamilies());
   }
 
   public static void seventhOption() {
@@ -186,7 +189,7 @@ public class Main {
         seventhOption();
       }
       familyController.deleteFamilyByIndex(familyId - 1);
-    } catch (NumberFormatException | IOException nfe) {
+    } catch (NumberFormatException nfe) {
       System.out.println("You entered the wrong number, please try again");
       seventhOption();
     }
@@ -231,7 +234,7 @@ public class Main {
         ninthOption();
       }
       familyController.deleteAllChildrenOlderThen(childAge);
-    } catch (NumberFormatException | IOException nfe) {
+    } catch (NumberFormatException nfe) {
       System.out.println("You entered the wrong number, please try again");
       ninthOption();
     }
@@ -248,7 +251,7 @@ public class Main {
     familyController.bornChild(family, boyName, girlName);
   }
 
-  public static void adoptChild() throws IOException {
+  public static void adoptChild() {
     System.out.println("Enter family ID");
     int familyId = input.nextInt();
     Family family = familyController.getFamilyById(familyId - 1);
@@ -292,6 +295,7 @@ public class Main {
             \t1. Родить ребенка\s
             \t2. Усыновить ребенка\s
             \t3. Вернуться в главное меню\s
-            9. Удалить всех детей старше возраста""");
+            9. Удалить всех детей старше возраста\s
+            10. Показать семьи с базы данных""");
   }
 }

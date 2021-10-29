@@ -78,7 +78,7 @@ public abstract class Pet implements Serializable {
   }
 
   public String prettyFormat() {
-    return String.format("species=%s, nickname=%s, age=%d, trickLevel=%d, habits=%s", this.getSpecies(), this.getNickname(),
+    return String.format("species=%s, nickname=%s, age=%d, trickLevel=%d, habits=%s", species, this.getNickname(),
             this.getAge(), this.getTrickLevel(), this.getHabits());
   }
 

@@ -137,15 +137,15 @@ public class Main {
 
   public static void sixthOption() {
     System.out.println("Enter mother's name");
-    String motherName = input.nextLine();
+    String motherName = input.next();
     System.out.println("Enter mother's surname");
-    String motherSurname = input.nextLine();
+    String motherSurname = input.next();
     System.out.println("Enter mother's year of birth");
-    String motherBirthYear = input.nextLine();
+    String motherBirthYear = input.next();
     System.out.println("Enter mother's months of birth");
-    String motherBirthMonth = input.nextLine();
+    String motherBirthMonth = input.next();
     System.out.println("Enter mother's day of birth");
-    String motherBirthDay = input.nextLine();
+    String motherBirthDay = input.next();
     System.out.println("Enter mother's IQ");
     int motherIq = input.nextInt();
     if (motherName.equals("") || motherSurname.equals("") || motherBirthDay.equals("") || motherBirthYear.equals("") || motherBirthMonth.equals(""))
@@ -154,15 +154,15 @@ public class Main {
             motherBirthYear), motherIq);
 
     System.out.println("Enter father's name");
-    String fatherName = input.nextLine();
+    String fatherName = input.next();
     System.out.println("Enter father's surname");
-    String fatherSurname = input.nextLine();
+    String fatherSurname = input.next();
     System.out.println("Enter father's year of birth");
-    String fatherBirthYear = input.nextLine();
+    String fatherBirthYear = input.next();
     System.out.println("Enter father's months of birth");
-    String fatherBirthMonth = input.nextLine();
+    String fatherBirthMonth = input.next();
     System.out.println("Enter father's day of birth");
-    String fatherBirthDay = input.nextLine();
+    String fatherBirthDay = input.next();
     System.out.println("Enter father's IQ");
     int fatherIq = input.nextInt();
     if (fatherName.equals("") || fatherSurname.equals("") || fatherBirthDay.equals("") || fatherBirthYear.equals("") || fatherBirthMonth.equals(""))

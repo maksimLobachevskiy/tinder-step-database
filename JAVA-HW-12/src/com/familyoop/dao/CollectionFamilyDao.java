@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CollectionFamilyDao implements FamilyDao, Serializable {
+public class CollectionFamilyDao implements FamilyDao {
   private final List<Family> familyList = new ArrayList<>();
 
 
-
   @Override
-  public List<Family> getAllFamilies() throws IOException {
-    return this.loadData();
+  public List<Family> getAllFamilies() {
+    return this.familyList;
   }
 
   @Override
@@ -45,34 +44,33 @@ public class CollectionFamilyDao implements FamilyDao, Serializable {
     int index = this.familyList.indexOf(family);
     if (this.familyList.contains(family)) {
       this.familyList.set(index, family);
+
     } else {
       this.familyList.add(family);
+    }
+    try(FileOutputStream fos = new FileOutputStream("family.txt");
+        ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+      oos.writeObject(this.familyList);
+    } catch (IOException e) {
+      e.printStackTrace(System.out);
     }
     return family;
   }
 
-  @Override
-  public void saveToFile(List<Family> family) {
-    try(FileOutputStream fos = new FileOutputStream("family.txt");
-        ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-oos.writeObject(family);
-    } catch (IOException e) {
-      e.printStackTrace(System.out);
-    }
-  }
-
-  @Override
+@Override
   public List<Family> loadData() throws IOException {
-    List<Family> familyList = null;
-    try(FileInputStream fis = new FileInputStream("family.txt");
-        ObjectInputStream ois = new ObjectInputStream(fis)) {
-     familyList = (List<Family>) ois.readObject();
-      System.out.println("Data from DB:");
-      System.out.println(familyList.stream().map(Family::prettyFormat).collect(Collectors.joining()));
-
-    } catch (FileNotFoundException | ClassNotFoundException e) {
-      e.printStackTrace(System.out);
+  List<Family> families = new ArrayList<>();
+  try(FileInputStream fis = new FileInputStream("family.txt");
+      ObjectInputStream ois = new ObjectInputStream(fis)) {
+   families = (List<Family>) ois.readObject();
+    System.out.println("Data from FILE:");
+    for (int i = 0; i < families.size(); i++) {
+      System.out.println(i + 1 + "." + " " + families.get(i).prettyFormat());
     }
-    return familyList;
+
+  } catch (FileNotFoundException | ClassNotFoundException e) {
+    e.printStackTrace(System.out);
   }
+  return families;
+}
 }

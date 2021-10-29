@@ -1,9 +1,10 @@
 package com.familyoop.pets;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Set;
 
-public class Dog extends Pet implements FoulHabits {
+public class Dog extends Pet implements FoulHabits, Serializable {
 private final Species species;
 
 public Dog(String nickname, int age, int trickLevel, Set<String> habits) {

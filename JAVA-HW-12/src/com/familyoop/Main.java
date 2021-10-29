@@ -88,7 +88,7 @@ public class Main {
 
   //Load data from FILE
   public static void secondOption() throws IOException {
-    familyController.loadData();
+    familyController.loadData().forEach(family -> familyDao.saveFamily(family));
   }
 
   //Load data from DB (DAO)
